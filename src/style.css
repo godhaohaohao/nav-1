@@ -1,0 +1,101 @@
+/* css reset*/
+*{margin: 0;padding: 0;box-sizing: border-box;}
+*:before,:after{box-sizing: border-box;}
+ul,ol{list-style: none;}
+img{
+    max-width: 100%; 
+    max-height: 100%;
+}
+a{
+    text-decoration: none;
+    color:#000;
+}
+/*style*/
+body{
+  background:rgb(238,237,239)
+}
+
+.searchform{
+    display: flex;
+    justify-content: space-between;
+margin: 20px;
+}
+.searchform > input{
+    border: 1px solid #ddd;
+width: 100%;
+margin-right: 10px;
+height: 40px;
+padding: 0 45px;
+border-radius: 5px;
+background:url(../img/baidu.jpg) ;
+background-size: 35px;
+background-repeat: no-repeat;
+background-color: white;
+}
+.searchform > button{
+    white-space: nowrap;
+    padding: 0px 20px;
+    border-radius: 5px;
+    border: none;
+    font-size: 15px;
+    background: rgb(50, 69, 223);
+    color: white;
+}
+
+.globalMain{}
+.siteList{
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 20px;
+}
+.siteList > li{
+    margin-bottom:10px; 
+}
+.siteList .site{
+    border-radius: 5px;
+    width: 160px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background: white;
+    padding: 20px 0;
+    border: 1px solid #ddd;
+}
+.siteList .site > .logo{
+ 
+    width: 64px;
+    height: 64px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 50px;
+    
+}
+.siteList .site > .link{
+    font-size: 15px;
+    margin-top: 5px;
+}
+.siteList .addButton{
+ width: 160px;
+ padding: 20px 0;
+ display: flex;
+ flex-direction: column;
+ justify-content: center;
+ align-items: center;
+ background:white;
+ border-radius: 5px;
+border: 1px solid #ddd;
+}
+.siteList .addButton .icon{
+    width: 64px;
+    height: 64px;
+background: url(../img/add.png) no-repeat;
+background-size:64px; 
+}
+.siteList .addButton .text{
+    font-size: 15px;
+    margin-top: 5px;
+}
