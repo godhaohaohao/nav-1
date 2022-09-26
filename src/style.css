@@ -14,11 +14,25 @@ a{
 body{
   background:rgb(238,237,239)
 }
-
+.globalHeader{
+    margin: 20px;
+}
+@media (min-width:500px){
+    .globalHeader{
+        margin: 60px 0 100px;
+    }
+}
 .searchform{
     display: flex;
     justify-content: space-between;
 margin: 20px;
+}
+@media (min-width: 500px) {
+    .searchform{
+max-width: 500px;
+margin-left: auto;
+margin-right:auto ;
+    }
 }
 .searchform > input{
     border: 1px solid #ddd;
@@ -42,18 +56,37 @@ background-color: white;
     color: white;
 }
 
-.globalMain{}
-.siteList{
+.globalMain{
+    max-width: 900px;
+    margin-right: auto;
+    margin-left: auto;
+}
 
+.siteList{
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
     margin: 20px;
+    justify-content: space-between;
+}
+@media (min-width :500px) {
+    .siteList{
+        margin-left: 0;
+        margin-right: 0;
+        margin-right: -25px;
+        justify-content: flex-start;
+    }  
 }
 .siteList > li{
     margin-bottom:10px; 
+
+}
+@media (min-width:500px){
+    .siteList > li{
+        margin-right: 25px;
+    }
 }
 .siteList .site{
+    cursor:pointer;
     border-radius: 5px;
     width: 160px;
     display: flex;
@@ -63,21 +96,34 @@ background-color: white;
     background: white;
     padding: 20px 0;
     border: 1px solid #ddd;
+    position: relative;
 }
 .siteList .site > .logo{
- 
     width: 64px;
     height: 64px;
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 50px;
-    
 }
 .siteList .site > .link{
     font-size: 15px;
     margin-top: 5px;
 }
+.siteList .site > .close{
+position: absolute;
+right: 0;
+top: 0;
+display: none;
+}
+.siteList .site:hover > .close{
+    display: block;
+}
+.siteList .site > .close > .closeImg{
+    width: 20px;
+    cursor: default;
+    
+} 
 .siteList .addButton{
  width: 160px;
  padding: 20px 0;

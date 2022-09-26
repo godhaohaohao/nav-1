@@ -1,20 +1,41 @@
-const $siteList= $('.siteList')
+const $siteList = $('.siteList')
 const $lastLi = $('.last')
-const hashMap =[
-    {logo:'../img/taobao.png',logoType:'image',url:'https://www.taobao.com/'},
-    {logo:'图',logoType:'text',url:'https://www.iconfont.cn/'},
-    {logo:'../img/bilibili.png',logoType:'image',url:'https://www.bilibili.com/'}
+const x = localStorage.getItem('x')
+const xObject = JSON.parse(x)
+const hashMap = xObject || [
+  { logo: 'T', url: 'https://www.taobao.com/' },
+  { logo: 'B', url: 'https://www.bilibili.com/' },
+  { logo: 'I', url: 'https://www.iconfont.cn/' }
 ]
-hashMap.forEach(node =>{
-    const $li = $(`<li><a href="${node.url}">
+const simplifyUrl = (url) => {
+  return url
+    .replace('https://', '')
+    .replace('www.', '')
+    .replace(/\/.*/, '')
+}
+const render = () => {
+  $siteList.find('li:not(.last)').remove()
+  hashMap.forEach((node, index) => {
+    const $li = $(`<li>
     <div class="site">
       <div class="logo">
         ${node.logo[0]}
       </div>
-      <div class="link">${node.url}</div>
+      <div class="link">${simplifyUrl(node.url)}</div>
+      <div class ="close"><img class ="closeImg"src="../img/close.png" alt=""></div>
     </div>
-  </a></li>`).insertBefore($lastLi)
-})
+  </li>`).insertBefore($lastLi)
+    $li.on('click', () => {
+      window.open(node.url)
+    })
+    $li.on('click', '.close', (e) => {
+      e.stopPropagation()
+      hashMap.splice(index, 1)
+      render()
+    })
+  },
+  )
+}
 
 {/* <li>
 <a href="https://www.taobao.com/">
@@ -44,22 +65,31 @@ hashMap.forEach(node =>{
   </div>
 </a>
 </li> */}
+render()
 
-$('.addButton').on('click',()=>{
-   let url =  window.prompt('请问您要访问的网址是什么')
-   if(url.indexOf('http') !== 0){
-   url = 'https://'+url 
-   }
-   console.log(url)
-   const $siteList= $('.siteList')
-   const li = $(`<li>
-   <a href="${url}">
-     <div class="site">
-       <div class="logo">
-         ${url[0]}
-       </div>
-       <div class="link">${url}</div>
-     </div>
-   </a>
- </li>`).insertBefore($lastLi)
+$('.addButton').on('click', () => {
+  let url = window.prompt('请问您要访问的网址是什么')
+  if (url.indexOf('http') !== 0) {
+    url = 'https://' + url
+  }
+  hashMap.push(
+    {
+      logo: simplifyUrl(url)[0].toUpperCase(),
+      url: url
+    });
+
+  render()
+})
+
+window.onbeforeunload = () => {
+  const string = JSON.stringify(hashMap)
+  localStorage.setItem('x', string)
+}
+document.addEventListener('keypress', (e) => {
+  const key = e.key
+  for (let i = 0; i < hashMap.length; i++) {
+    if (hashMap[i].logo.toLowerCase() === key) {
+      window.open(hashMap[i].url)
+    }
+  }
 })
